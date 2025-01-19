@@ -32,6 +32,6 @@ try:
         smtp.starttls()
         smtp.login(from_email, password)
         smtp.sendmail("Private Person <from@example.com>", to_email, message.as_string())
-    print("Email enviado com sucesso!") 
+    print("Email enviado com sucesso!")
 except Exception as e: 
     print(f"Ocorreu um erro: {e}")
