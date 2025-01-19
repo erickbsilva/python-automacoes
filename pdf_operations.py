@@ -79,6 +79,16 @@ def rotate_pdf(pdf_path, page_num: int, rotation: int = 90):
             writer.write(out)
 
 
+def extract_images_from_pdf(pdf_path):
+    with open(pdf_path, "rb") as f:
+        reader = PdfReader(f)
+        for page_num in range(0, len(reader.pages)):
+            selected_page = reader.pages[page_num]
+            for img_file_obj in selected_page.images:
+                with open(f"files/{img_file_obj.name}", "wb") as out:
+                    out.write(img_file_obj.data)
+
+
 # split_pdf("files/sample2.pdf")
 # get_pdf_upto("files/sample2.pdf", 1, 2)
 
@@ -87,10 +97,12 @@ def rotate_pdf(pdf_path, page_num: int, rotation: int = 90):
 # pdf_list = fetch_all_pdf_files("files/")
 # merge_pdf(pdf_list)
 
-rotate_pdf("files/sample.pdf", 0)
+# rotate_pdf("files/sample.pdf", 0)
 
 # print(get_pdf_metadata("files/sample.pdf"))
 # print(get_pdf_metadata("files/sample.pdf").title)
 # print(get_pdf_metadata("files/sample.pdf").author)
 
 # print(extract_text_from_pdf("files/sample.pdf"))
+
+extract_images_from_pdf("files/test_pdf_image.pdf")
