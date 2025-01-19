@@ -1,5 +1,6 @@
 import PyPDF2 as pdf
 from PyPDF2 import PdfReader, PdfWriter, PdfMerger
+from PIL import Image
 import os
 
 
@@ -89,6 +90,13 @@ def extract_images_from_pdf(pdf_path):
                     out.write(img_file_obj.data)
 
 
+def convert_img_pdf(image_file):
+    my_image = Image.open(image_file)
+    img = my_image.convert("RGB")
+    filename = f"{os.path.splitext(image_file)[0]}.pdf"
+    img.save(filename)
+
+
 # split_pdf("files/sample2.pdf")
 # get_pdf_upto("files/sample2.pdf", 1, 2)
 
@@ -105,4 +113,6 @@ def extract_images_from_pdf(pdf_path):
 
 # print(extract_text_from_pdf("files/sample.pdf"))
 
-extract_images_from_pdf("files/test_pdf_image.pdf")
+# extract_images_from_pdf("files/test_pdf_image.pdf")
+
+convert_img_pdf("files/estrela.png")
